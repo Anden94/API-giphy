@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="header">
+    <h1>Giphy</h1>
+    <h3>Search for a GIF!</h3>
+  </div>
+  <div id = "userInput">
+    <input type="search" id="gsearch" class="gsearch" name="gsearch" placeholder="Search for a gif...">
+    <input type="button" class="button" onclick="setQuery()" value="Skicka">
+
+  </div>
+  <div id="imgTarget">
+    <img src="designdevunicorn.jpg" />
+
+  </div>
+  
+  
+  
+
+
+  <script>
+
+    
+
+    function setQuery(){
+      const img = document.querySelector('img');
+      var userInput= document.getElementById("gsearch").value;
+      const apikey = "6XlyXbm39yRY3Oo5eO52YXKgFKmydwkX";
+      const api = `https://api.giphy.com/v1/gifs/translate?api_key=${apikey}&s=${userInput}`;      
+      
+    fetch(api)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(response) {
+        console.log(response);
+        console.log(response.data.images.fixed_height.url);
+        img.src = response.data.images.fixed_height.url;
+      })
+      .catch(e => {
+      console.log( "Error" + e)
+    })
+    }
+    
+  </script>
+</body>
+</html>
